@@ -40,11 +40,11 @@ class ParamConverterListener
 
         // automatically apply conversion for non-configured objects
         foreach ($r->getParameters() as $param) {
-            if (!$param->getClass() || $param->getClass()->isInstance($request)) {
+            if (!$param->getType() || !($request instanceof ($param->getType()->__toString()))) {
                 continue;
-            }
+            };
 
-            $class = $param->getClass()->getName();
+            $class = $param->getType()->__toString();
             $name = $param->getName();
 
             if ("QafooLabs\\MVC\\Flash" === $class) {
